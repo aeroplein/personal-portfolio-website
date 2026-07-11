@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Sacramento&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", "Cormorant Garamond", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-script: "Sacramento", "Cormorant Garamond", cursive;
+
+  /* Custom Palette Setup */
+  --color-lilac-mist: #F4EFFA;
+  --color-soft-wisteria: #EEE5F7;
+  --color-ivory: #F4F7EA;
+  --color-soft-blossom: #DEAFC2;
+  --color-petal-pink: #D480BB;
+  --color-deep-plum: #3E2C44;
+  --color-mulberry: #5A2848;
+  --color-bright-lavender: #A775C9;
+  --color-sky-reflection: #75ADC9;
+  
+  /* Additional neutral shades for design flexibility and subtle gradients */
+  --color-lavender-blush: #E2D9E2;
+  --color-thistle: #CDB9DD;
+  --color-soft-periwinkle: #9580D4;
+  --color-rose-ink: #8B2F62;
+  --color-honeydew: #EAF7EC;
+
+  /* Accent Shadows & Radii */
+  --radius-xl-editorial: 24px;
+  --radius-lg-editorial: 16px;
+}
+
+/* Custom Scrollbar to match the pink/lilac theme */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F4EFFA;
+}
+::-webkit-scrollbar-thumb {
+  background: #CDB9DD;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #D480BB;
+}
+
+/* Base style resets */
+body {
+  background-color: #F4EFFA;
+  color: #3E2C44;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+.text-editorial-gradient {
+  background: linear-gradient(135deg, #3E2C44 20%, #8B2F62 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-dream-gradient {
+  background: linear-gradient(225deg, #F4EFFA 0%, #DEAFC2 40%, #CDB9DD 75%, #EEE5F7 100%);
+}
+
+.sticker-shadow {
+  box-shadow: 0 4px 14px rgba(90, 40, 72, 0.08);
+}
+
+.sticker-shadow-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.sticker-shadow-hover:hover {
+  transform: translateY(-4px) rotate(-1deg);
+  box-shadow: 0 12px 24px rgba(90, 40, 72, 0.12);
+}
+
