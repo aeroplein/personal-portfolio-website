@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @license
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -33,22 +33,22 @@ export default function AboutSection() {
             <div className="bg-ivory border border-thistle/45 p-8 rounded-xl-editorial shadow-sm relative overflow-hidden">
               <div className="absolute top-0 right-0 w-24 h-24 bg-soft-blossom/10 rounded-bl-full pointer-events-none" />
               
-              <h3 className="font-serif text-xl sm:text-2xl font-bold text-deep-plum mb-4 leading-tight">
-                "Computer science is more than algorithms — it's an art form waiting to be expressed through beautiful, pristine compilers and architecture."
+                            <h3 className="font-serif text-xl sm:text-2xl font-bold text-deep-plum mb-4 leading-tight">
+                "Software engineering is more than writing algorithms. It is the craft of understanding real problems closely enough to design solutions that genuinely help people. I believe technical work becomes stronger when curiosity, creativity, and the things we enjoy are allowed into the process."
               </h3>
               
-              <p className="font-sans text-base text-deep-plum/80 leading-relaxed space-y-4">
-                I am a third-year Computer Engineering student dedicated to crafting responsive full-stack applications and typing rigorous, zero-overhead backend logic. My interest lies on the boundary between strict hardware constraints and elegant visual environments.
+                            <p className="font-sans text-base text-deep-plum/80 leading-relaxed">
+                As a fourth-year Computer Engineering student, I am exploring how full-stack development, backend systems, AI, machine learning, and data science can work together to solve meaningful problems.
               </p>
               
-              <p className="font-sans text-base text-deep-plum/80 leading-relaxed mt-4">
-                Growing up, I felt a disconnect between the cold, sterile dashboards of developer software and the warm, creative journals I kept on my desk. Today, my mission is to build software with a cozy aesthetic, showing that code can be as inviting and beautiful as it is robust and safe.
+                            <p className="font-sans text-base text-deep-plum/80 leading-relaxed mt-4">
+                I am equally interested in the academic side of computing: learning the theoretical foundations behind a system, understanding why an approach works, and carrying that knowledge into practical, human-centered solutions. I enjoy connecting systems, data, design, and real user needs to create work that is technically grounded, creatively considered, and genuinely useful.
               </p>
 
-              <div className="mt-6 pt-6 border-t border-thistle/30 flex flex-wrap items-center gap-4 text-xs font-mono text-rose-ink">
-                <span>✦ B.S. Senior Candidate</span>
-                <span>• Systems enthusiast</span>
-                <span>✿ Human-centric developer</span>
+                            <div className="mt-6 pt-6 border-t border-thistle/30 flex flex-wrap items-center gap-4 text-xs font-mono text-rose-ink">
+                <span>B.S. Senior Candidate</span>
+                <span>Systems learner</span>
+                <span>Human-centered developer</span>
               </div>
             </div>
 
@@ -115,7 +115,7 @@ export default function AboutSection() {
                 <Heart className="w-3.5 h-3.5 fill-rose-ink stroke-rose-ink" /> Vibe Check
               </p>
               <p className="font-sans text-xs text-deep-plum/80 mt-2">
-                Lavender matcha fuel • 100+ book shelf • mechanical keyboards with pink accents • clean compilers
+                Lavender matcha fuel â€¢ 100+ book shelf â€¢ mechanical keyboards with pink accents â€¢ clean compilers
               </p>
             </div>
 
@@ -126,3 +126,4 @@ export default function AboutSection() {
     </section>
   );
 }
+
