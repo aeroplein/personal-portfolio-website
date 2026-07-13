@@ -4,7 +4,7 @@
  */
 
 import { motion } from 'motion/react';
-import { BookOpen, Circle, Compass, Flower2, Heart, Laptop, Sparkles } from 'lucide-react';
+import { BookOpen, Compass, Heart, Laptop } from 'lucide-react';
 
 export default function AboutSection() {
   return (
@@ -46,18 +46,9 @@ export default function AboutSection() {
               </p>
 
               <div className="mt-6 pt-6 border-t border-thistle/30 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-mono text-rose-ink">
-                <span className="inline-flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />
-                  B.S. Senior Candidate
-                </span>
-                <span className="inline-flex items-center gap-1.5">
-                  <Circle className="w-1.5 h-1.5 fill-current" aria-hidden="true" />
-                  Systems learner
-                </span>
-                <span className="inline-flex items-center gap-1.5">
-                  <Flower2 className="w-3.5 h-3.5" aria-hidden="true" />
-                  Human-centered developer
-                </span>
+                <span>{'\u2726'} B.S. Senior Candidate</span>
+                <span>{'\u2022'} Systems learner</span>
+                <span>{'\u273F'} Human-centered developer</span>
               </div>
             </div>
 
