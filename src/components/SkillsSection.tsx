@@ -267,10 +267,10 @@ export default function SkillsSection() {
         </div>
 
         {/* Bento Grid layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
+        <div>
           
           {/* LEFT PANEL: Interactive Skill Tag Cloud Workspace (Ivory paper panel) */}
-          <div className="lg:col-span-8 bg-ivory border border-[#CDB9DD] p-6 md:p-8 rounded-xl-editorial shadow-sm flex flex-col justify-between">
+          <div className="bg-ivory border border-[#CDB9DD] p-6 md:p-8 rounded-xl-editorial shadow-sm flex flex-col justify-between">
             
             <div>
               {/* Category selectors */}
@@ -375,37 +375,6 @@ export default function SkillsSection() {
               </div>
             </div>
 
-          </div>
-
-          {/* RIGHT PANEL: concise engineering approach */}
-          <div className="lg:col-span-4 bg-mulberry text-ivory border border-deep-plum p-6 md:p-8 rounded-xl-editorial shadow-md relative overflow-hidden flex flex-col justify-between">
-            <div className="absolute inset-0 bg-[radial-gradient(#DEAFC2_1px,transparent_1px)] [background-size:16px_16px] opacity-10 pointer-events-none" />
-
-            <div className="relative z-10 flex h-full flex-col gap-6">
-              <div>
-                <p className="font-mono text-[10px] tracking-wider text-soft-blossom uppercase">Working principles</p>
-                <h3 className="mt-3 font-serif text-2xl font-bold leading-tight">How I build</h3>
-                <p className="mt-3 text-sm leading-relaxed text-ivory/80">
-                  I prefer understandable systems: a clear interface, an explicit data flow, and a testable backend boundary.
-                </p>
-              </div>
-
-              <div className="space-y-4 border-t border-white/15 pt-5">
-                {[
-                  ['Start with the user flow', 'Define the screen state and the API contract before adding visual polish.'],
-                  ['Keep boundaries explicit', 'Separate browser concerns from server logic and protect authenticated routes.'],
-                  ['Measure before optimizing', 'Use real loading or interaction evidence before adding caching or complexity.'],
-                ].map(([title, description]) => (
-                  <div key={title} className="flex gap-3">
-                    <Circle className="mt-1 h-2.5 w-2.5 shrink-0 text-petal-pink" fill="currentColor" />
-                    <div>
-                      <h4 className="font-sans text-sm font-semibold text-ivory">{title}</h4>
-                      <p className="mt-1 text-xs leading-relaxed text-ivory/70">{description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
 
         </div>
