@@ -41,14 +41,14 @@ const skillCommentaries: Record<string, { note: string; project: string; depth: 
     fact: "Supports model training, feature extraction, and research-oriented data workflows."
   },
   'C / C++': {
-    note: "My foundation in low-level systems. Guided over 90 students on pointers, raw memory blocks, and balanced trees.",
-    project: "Data Structures Course Assistant",
+    note: "My foundation in low-level systems programming, data structures, and memory-aware implementation.",
+    project: "Systems programming coursework",
     depth: "Fluent (85%)",
     fact: "Executed manual malloc leak verification using Valgrind."
   },
   'SQL': {
     note: "Designing third-normal-form relation structures, normal schemas, row index plans, and fast execution queries.",
-    project: "AstraSoft Databases",
+    project: "AuraBoard database design",
     depth: "Fluent (80%)",
     fact: "Optimized complex multi-table JOINs to reduce index scan latencies."
   },
@@ -90,7 +90,7 @@ const skillCommentaries: Record<string, { note: string; project: string; depth: 
   },
   'Figma Prototyping': {
     note: "Drafting user flows, selecting editorial palettes, arranging negative space, and designing custom interactive elements.",
-    project: "CozyHacks STEM wireframes",
+    project: "Personal product prototypes",
     depth: "Fluent (80%)",
     fact: "Built structured responsive grids and unified design styles."
   },
@@ -102,7 +102,7 @@ const skillCommentaries: Record<string, { note: string; project: string; depth: 
   },
   'PostgreSQL': {
     note: "My relational system of choice. Tuning query executions, configuring row indexes, and managing database connection pools.",
-    project: "AstraSoft Internship",
+    project: "AuraBoard data layer",
     depth: "Expert (90%)",
     fact: "Designed transactional schemas with strict integrity rules."
   },
@@ -114,13 +114,13 @@ const skillCommentaries: Record<string, { note: string; project: string; depth: 
   },
   'Redis Cache Layer': {
     note: "Employing standard cache-aside design strategies to decrease database read cycles and host rapid sessions.",
-    project: "AstraSoft API pipelines",
+    project: "Backend architecture studies",
     depth: "Fluent (85%)",
     fact: "Reduced bulk export endpoint latency by 3x with caching."
   },
   'MongoDB / JSON Stores': {
     note: "Using document arrays to save flexible schemas, micro-journals, and unstructured state-machine records.",
-    project: "CozyHacks storage schemas",
+    project: "Personal project prototypes",
     depth: "Fluent (80%)",
     fact: "Optimized complex nested sub-document pipeline queries."
   },
@@ -340,11 +340,7 @@ export default function SkillsSection() {
 
             {/* EXPANDABLE ENGINEERING MEMO: Tactile handwritten notepad style */}
             <div className="bg-soft-blossom/20 border-l-4 border-petal-pink p-5 rounded-r-lg relative overflow-hidden shadow-xs">
-              <div className="absolute top-2 right-2 opacity-5 pointer-events-none font-serif text-6xl select-none">
-                âœ
-              </div>
-
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-[#CDB9DD]/35 pb-2.5 mb-3">
+<div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-[#CDB9DD]/35 pb-2.5 mb-3">
                 <div className="flex items-center gap-1.5">
                   <Code2 className="w-4 h-4 text-petal-pink" />
                   <span className="font-serif font-bold text-sm text-deep-plum">
@@ -382,6 +378,7 @@ export default function SkillsSection() {
     </section>
   );
 }
+
 
 
 

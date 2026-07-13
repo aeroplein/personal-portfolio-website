@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @license
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -34,8 +34,7 @@ export default function AwardsSection() {
           <div className="w-16 h-1 bg-petal-pink mt-4 rounded-full mx-auto" />
         </div>
 
-        {/* 3-Column Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch max-w-4xl mx-auto">
           {achievements.map((ach, index) => (
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -77,7 +76,7 @@ export default function AwardsSection() {
                   <Star className="w-3.5 h-3.5 fill-petal-pink" />
                   {ach.badge}
                 </span>
-                <span className="text-deep-plum/30">✿</span>
+                <Sparkles className="w-3.5 h-3.5 text-deep-plum/30" aria-hidden="true" />
               </div>
             </motion.div>
           ))}
@@ -86,3 +85,4 @@ export default function AwardsSection() {
     </section>
   );
 }
+

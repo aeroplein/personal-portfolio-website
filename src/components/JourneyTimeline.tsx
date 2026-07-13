@@ -39,7 +39,7 @@ export default function JourneyTimeline() {
             Academic <span className="font-script text-petal-pink text-4xl sm:text-5xl italic font-normal">Journey</span>
           </h2>
           <p className="font-sans text-sm text-mulberry/80 mt-2 max-w-xl mx-auto">
-            An overview of structural chapters in my engineering education, research assistance, and technical internship roles.
+            An overview of my computer engineering education and academic progress.
           </p>
           <div className="w-16 h-1 bg-petal-pink mt-4 rounded-full mx-auto" />
         </div>

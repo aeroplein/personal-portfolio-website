@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @license
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -183,39 +183,12 @@ def build_mel_classifier(input_shape, num_classes=10):
 export const timelineEvents: TimelineEvent[] = [
   {
     id: 'edu-1',
-    period: '2023 — Present',
+    period: '2023 - Present',
     title: 'Computer Engineering, B.S.',
     organization: 'Faculty of Engineering & Natural Sciences',
-    description: 'Pursuing a highly analytical curriculum with a focus on systems, software design, compilation, and machine learning. Awarded Academic Excellence Scholarship; running an impressive 3.89 Cumulative GPA.',
+    description: 'Pursuing a highly analytical curriculum with a focus on systems, software design, compilation, and machine learning. Recipient of a 100% OSYM scholarship and an additional university top-student scholarship.',
     type: 'education',
     skills: ['Data Structures & Algorithms', 'Operating Systems', 'Database Systems', 'Software Engineering Principles']
-  },
-  {
-    id: 'exp-1',
-    period: 'Summer 2025',
-    title: 'Backend Developer Intern',
-    organization: 'AstraSoft Web Dynamics',
-    description: 'Crafted robust multi-tenant backend APIs and integrated cache pipelines. Optimized queries across complex tabular post-processing layers, culminating in a 3x speedup of bulk export APIs.',
-    type: 'experience',
-    skills: ['PostgreSQL', 'Python (FastAPI)', 'Redis Caching', 'Docker Containers', 'REST APIs']
-  },
-  {
-    id: 'exp-2',
-    period: 'Fall 2024 — Spring 2025',
-    title: 'Undergraduate Course Assistant',
-    organization: 'Data Structures and Architecture Lab',
-    description: 'Mentored over 90 sophomore students on pointers, dynamic memory management in C/C++, garbage collection strategies, and balanced search tree heights.',
-    type: 'experience',
-    skills: ['Instruction', 'C / C++', 'Memory Debugging', 'Valgrind']
-  },
-  {
-    id: 'milestone-1',
-    period: 'Spring 2024',
-    title: 'Co-Founder / tech lead',
-    organization: 'CozyHacks STEM Hackathon',
-    description: 'Spearheaded technical development and infrastructure setup for a student-run regional coding event centered on digital wellness applications.',
-    type: 'milestone',
-    skills: ['Project Leadership', 'UI/UX Visual design', 'System Scalability']
   }
 ];
 
@@ -280,27 +253,19 @@ export const skillsData: SkillCategory[] = [
 export const achievements: Achievement[] = [
   {
     id: 'ach-1',
-    title: 'Academic Honor & Merit Scholarship',
-    issuer: 'University Excellence Council',
-    year: '2023 — 2026',
-    description: 'Awarded to top 3% students maintaining an exceptional CGPA (> 3.85) each consecutive term.',
-    badge: '★ Academic Merit'
+    title: '100% OSYM Scholarship',
+    issuer: 'OSYM',
+    year: 'Full Scholarship',
+    description: 'Awarded a full scholarship for undergraduate study through OSYM.',
+    badge: 'Full Scholarship'
   },
   {
     id: 'ach-2',
-    title: 'Grace Hopper STEM Delegate Selection',
-    issuer: 'Women in Computing Regional Chapter',
-    year: '2025',
-    description: 'Selected as one of 10 university candidates to attend and participate in research tracks and hackathons.',
-    badge: '✦ STEM Leadership'
-  },
-  {
-    id: 'ach-3',
-    title: 'CozyTech Innovative Solution Award',
-    issuer: 'National Student Design Slam',
-    year: '2024',
-    description: 'Recognized for a student-built digital wellness concept combining thoughtful interface design with practical software engineering.',
-    badge: '✿ Best UX Concept'
+    title: 'University Top Student Scholarship',
+    issuer: 'University Scholarship Award',
+    year: '10% Scholarship',
+    description: 'Awarded an additional 10% scholarship in recognition of top-student academic achievement.',
+    badge: 'Academic Excellence'
   }
 ];
 
@@ -354,3 +319,4 @@ export const journalEntries: JournalEntry[] = [
     mood: 'curious and reflective'
   }
 ];
+
