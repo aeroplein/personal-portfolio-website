@@ -33,13 +33,13 @@ export default function JourneyTimeline() {
         {/* Editorial Title */}
         <div className="text-center mb-16">
           <span className="font-mono text-xs uppercase tracking-widest text-petal-pink font-semibold">
-            04 / Curriculum Vitae
+            04 / Project Leadership &amp; Education
           </span>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-deep-plum mt-2">
-            Academic <span className="font-script text-petal-pink text-4xl sm:text-5xl italic font-normal">Journey</span>
+            Decisions into <span className="font-script text-petal-pink text-4xl sm:text-5xl italic font-normal">delivery</span>
           </h2>
           <p className="font-sans text-sm text-mulberry/80 mt-2 max-w-xl mx-auto">
-            An overview of my computer engineering education and academic progress.
+            Academic leadership and technical contribution, followed by the foundation behind the work.
           </p>
           <div className="w-16 h-1 bg-petal-pink mt-4 rounded-full mx-auto" />
         </div>

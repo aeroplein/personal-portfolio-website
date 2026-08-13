@@ -17,181 +17,110 @@ import {
   Circle
 } from 'lucide-react';
 import { skillsData } from '../data';
-import { getSkills } from '../api/portfolioApi';
+import { getSkills, hasPortfolioApi } from '../api/portfolioApi';
 import type { SkillCategory } from '../types';
 
 // Custom technical commentary from Pelin's computer engineering experience
 const skillCommentaries: Record<string, { note: string; project: string; depth: string; fact: string }> = {
-  'TypeScript / JS': {
-    note: "I use TypeScript and JavaScript for typed React components, API wiring, frontend behavior, and browser-based interactions.",
-    project: "Portfolio UI, AuraBoard, Frantic Barista",
-    depth: "Expert (95%)",
-    fact: "Shows I can connect interface state, data from APIs, and interactive client-side logic."
+  Java: {
+    note: 'I use Java to practice object-oriented programming, backend concepts, and structured application design.',
+    project: 'CodeYourTree and coursework',
+    depth: 'Fluent',
+    fact: 'Supports clear, maintainable application logic.'
   },
-  'Rust': {
-    note: "Studied as part of systems-level programming interests, memory safety, and low-level architecture exploration.",
-    project: "Systems learning track",
-    depth: "Familiar (75%)",
-    fact: "Connects ownership and borrowing concepts to safer systems design."
-  },
-  'Python': {
-    note: "My primary engine for matrix manipulations, supervised machine learning pipelines, text processing, and data filtering.",
-    project: "Music Genre Classifier & Generative XAI ADHD-EEG",
-    depth: "Fluent (88%)",
-    fact: "Supports model training, feature extraction, and research-oriented data workflows."
+  Python: {
+    note: 'I use Python for data work, machine learning experiments, and research-oriented programming.',
+    project: 'Music Genre Detection and AI research work',
+    depth: 'Fluent',
+    fact: 'Supports data preparation, model experiments, and analysis.'
   },
   'C / C++': {
-    note: "My foundation in low-level systems programming, data structures, and memory-aware implementation.",
-    project: "Systems programming coursework",
-    depth: "Fluent (85%)",
-    fact: "Executed manual malloc leak verification using Valgrind."
+    note: 'I use C and C++ for systems programming, data structures, and memory-aware implementation.',
+    project: 'Secure SSH Tunneling Simulation Engine',
+    depth: 'Fluent',
+    fact: 'Builds a strong foundation in lower-level programming.'
   },
-  'SQL': {
-    note: "Designing third-normal-form relation structures, normal schemas, row index plans, and fast execution queries.",
-    project: "AuraBoard database design",
-    depth: "Fluent (80%)",
-    fact: "Optimized complex multi-table JOINs to reduce index scan latencies."
+  'Node.js': {
+    note: 'I use Node.js to build server-side functionality and connect applications to APIs and data.',
+    project: 'Overengineering Detector',
+    depth: 'Fluent',
+    fact: 'Supports practical backend and service development.'
   },
-  'Node.js / Express': {
-    note: "Structuring modular API routers, custom error-handling middlewares, and low-latency microservice interfaces.",
-    project: "Overengineering Detector Engine",
-    depth: "Expert (90%)",
-    fact: "Coordinates repository analysis requests and scoring-service responses."
+  Express: {
+    note: 'I use Express to organize routes, request handling, and API responses in Node.js applications.',
+    project: 'Overengineering Detector',
+    depth: 'Fluent',
+    fact: 'Keeps backend endpoints structured and understandable.'
   },
-  'FastAPI / Flask': {
-    note: "Building modern asynchronous endpoints, strict Pydantic models, and auto-documenting schema configurations in Python.",
-    project: "Python ML API practice",
-    depth: "Fluent (85%)",
-    fact: "Useful for serving lightweight model inference and experiment endpoints."
+  'REST APIs': {
+    note: 'I design and work with REST APIs to connect frontend interfaces, backend logic, and databases.',
+    project: 'Portfolio API and full-stack projects',
+    depth: 'Fluent',
+    fact: 'Connects application features through clear HTTP contracts.'
   },
-  'gRPC & Protocol Buffers': {
-    note: "Designing protobuf schemas for type-safe, lightweight, and language-independent client-server network routing.",
-    project: "Backend systems study",
-    depth: "Familiar (70%)",
-    fact: "Builds intuition for strict API contracts and efficient service boundaries."
+  HTML: {
+    note: 'I use HTML to structure accessible, semantic web interfaces.',
+    project: 'Portfolio and web projects',
+    depth: 'Fluent',
+    fact: 'Provides the foundation for clear web content.'
   },
-  'RESTful Architecture': {
-    note: "Designing clean endpoint parameters, safe headers, stateless tokens, and precise HTTP method integrity.",
-    project: "Backend API cohorts",
-    depth: "Expert (95%)",
-    fact: "Standardized rate-limiting schemes for security cohorts."
+  CSS: {
+    note: 'I use CSS to create responsive, polished interfaces with attention to layout and visual clarity.',
+    project: 'Portfolio and web projects',
+    depth: 'Fluent',
+    fact: 'Turns structure into a useful, enjoyable experience.'
   },
-  'React 19 & Next.js': {
-    note: "Building cohesive web interfaces using functional architectures, responsive rendering hooks, and component scopes.",
-    project: "Portfolio UI and AuraBoard frontend",
-    depth: "Expert (92%)",
-    fact: "Connects backend data to polished, responsive portfolio and app screens."
+  PostgreSQL: {
+    note: 'I use PostgreSQL for relational data modeling, queries, and persistent application data.',
+    project: 'AuraBoard and CodeYourTree',
+    depth: 'Fluent',
+    fact: 'Supports reliable relational data storage.'
   },
-  'Tailwind CSS v4': {
-    note: "Transforming high-fidelity mockups into polished, responsive, and tactile layouts using custom CSS theme tokens.",
-    project: "Feminine magazine designs",
-    depth: "Expert (95%)",
-    fact: "Employs modern CSS-first theme variables for rapid UI load times."
+  'Microsoft SQL Server': {
+    note: 'I use Microsoft SQL Server for relational database design and SQL querying.',
+    project: 'Database coursework',
+    depth: 'Fluent',
+    fact: 'Strengthens practical SQL and data-modeling skills.'
   },
-  'Figma Prototyping': {
-    note: "Drafting user flows, selecting editorial palettes, arranging negative space, and designing custom interactive elements.",
-    project: "Personal product prototypes",
-    depth: "Fluent (80%)",
-    fact: "Built structured responsive grids and unified design styles."
+  Pandas: {
+    note: 'I use Pandas for cleaning, exploring, and preparing datasets for analysis and machine learning.',
+    project: 'Data science coursework and experiments',
+    depth: 'Fluent',
+    fact: 'Makes tabular data easier to inspect and transform.'
   },
-  'Motion / Framer Motion': {
-    note: "Breathing a warm, cozy soul into sterile tech through staggered entries, spring layouts, and physical feedback loops.",
-    project: "Tactile web assets",
-    depth: "Fluent (85%)",
-    fact: "Synchronizes layout shifts using spring-physics coordinates."
+  PyTorch: {
+    note: 'I use PyTorch to explore neural-network ideas and implement deep-learning experiments.',
+    project: 'Generative XAI ADHD-EEG project',
+    depth: 'Fluent',
+    fact: 'Supports hands-on research and model experimentation.'
   },
-  'PostgreSQL': {
-    note: "My relational system of choice. Tuning query executions, configuring row indexes, and managing database connection pools.",
-    project: "AuraBoard data layer",
-    depth: "Expert (90%)",
-    fact: "Designed transactional schemas with strict integrity rules."
-  },
-  'RocksDB / LevelDB': {
-    note: "Experimenting with embedded log-structured merge trees (LSM), block caches, and persistent raw key-value storage.",
-    project: "Storage systems study",
-    depth: "Familiar (75%)",
-    fact: "Sharpens database internals knowledge beyond ordinary ORM usage."
-  },
-  'Redis Cache Layer': {
-    note: "Employing standard cache-aside design strategies to decrease database read cycles and host rapid sessions.",
-    project: "Backend architecture studies",
-    depth: "Fluent (85%)",
-    fact: "Reduced bulk export endpoint latency by 3x with caching."
-  },
-  'MongoDB / JSON Stores': {
-    note: "Using document arrays to save flexible schemas, micro-journals, and unstructured state-machine records.",
-    project: "Personal project prototypes",
-    depth: "Fluent (80%)",
-    fact: "Optimized complex nested sub-document pipeline queries."
-  },
-  'scikit-learn Classifier': {
-    note: "Preparing feature vectors, cleaning datasets, training classifiers, and evaluating baseline model behavior.",
-    project: "Music Genre Classifier",
-    depth: "Fluent (82%)",
-    fact: "Builds the baseline modeling instincts that support deeper learning experiments."
-  },
-  'Pandas & NumPy Stack': {
-    note: "Parsing tabular statistics, vectorizing operations, and managing large matrix arrays for analytical computation.",
-    project: "Undergrad ML coursework",
-    depth: "Expert (90%)",
-    fact: "Eliminated Python loop overflows with high-performance vectors."
-  },
-  'PyTorch Basics': {
-    note: "Exploring linear layers, training cycles, backpropagation formulas, activation functions, and tensor arithmetic.",
-    project: "Introductory ML models",
-    depth: "Familiar (65%)",
-    fact: "Designed small feed-forward networks for handwritten digit tests."
-  },
-  'Data Visualisation (D3 / Recharts)': {
-    note: "Generating custom charts, dependency maps, and visual summaries for technical analysis results.",
-    project: "Overengineering Detector Engine",
-    depth: "Fluent (85%)",
-    fact: "Turns structural analysis into readable diagrams and comparison views."
-  },
-  'Git & GitHub Actions': {
-    note: "Managing source integrity, rebase workflows, and writing automated CI scripts to check compilation steps.",
-    project: "Collaborative STEM cohorts",
-    depth: "Expert (90%)",
-    fact: "Scripts custom triggers to lint, format, and build on commits."
-  },
-  'Docker Containerization': {
-    note: "Isolating web microservices, preparing multi-stage builds, and configuring predictable server environments.",
-    project: "FastAPI server containers",
-    depth: "Fluent (80%)",
-    fact: "Reduced Docker image sizes by utilizing alpine-based stages."
-  },
-  'Linux Command Line': {
-    note: "Working with bash environments, standard piping utilities, automation scripts, and server configuration registers.",
-    project: "Daily systems workspace",
-    depth: "Expert (90%)",
-    fact: "Automates diagnostic checks via custom shell procedures."
-  },
-  'Vite & Bundler Systems': {
-    note: "Setting up lightweight dev servers, resolving custom paths, tree-shaking dead code, and optimizing build distributions.",
-    project: "Modern web layouts",
-    depth: "Expert (92%)",
-    fact: "Customizes asset routing paths for fast browser loads."
+  TensorFlow: {
+    note: 'I use TensorFlow for machine-learning workflows and model experimentation.',
+    project: 'Music Genre Detection',
+    depth: 'Fluent',
+    fact: 'Supports end-to-end model development and evaluation.'
   }
 };
 
 // Map the API categories to the labels used in the portfolio.
 const categoryTabs = [
   { label: 'All Skills', value: 'all' },
-  { label: 'Languages', value: 'Languages' },
-  { label: 'Backend', value: 'Backend Systems' },
-  { label: 'Frontend & UI', value: 'Frontend & Design' },
-  { label: 'Databases & Cache', value: 'Databases & Cache' },
-  { label: 'AI & Data Science', value: 'AI & Data Science' },
-  { label: 'Tools', value: 'Tools & DevOps' },
+  { label: 'Protecting Boundaries', value: 'Protecting Boundaries' },
+  { label: 'Persistent State', value: 'Modeling Persistent State' },
+  { label: 'Data Flow', value: 'Understanding Data Flow' },
+  { label: 'Data & Models', value: 'Evaluating Data & Models' },
+  { label: 'Visible Behavior', value: 'Making Behavior Visible' },
 ] as const;
 
 export default function SkillsSection() {
   const [selectedTab, setSelectedTab] = useState<string>('all');
-  const [selectedSkill, setSelectedSkill] = useState<string>('TypeScript / JS');
+  const [selectedSkill, setSelectedSkill] = useState<string>('C#');
   const [skillCategories, setSkillCategories] = useState<SkillCategory[]>(skillsData);
 
   // Flat list of all skills populated by category
   useEffect(() => {
+    if (!hasPortfolioApi) return;
+
     getSkills()
       .then(setSkillCategories)
       .catch((error) => {
@@ -228,15 +157,15 @@ export default function SkillsSection() {
   // Get matching icons for category types
   const getCategoryIcon = (category: string) => {
     switch (category) {
-      case 'Languages':
+      case 'Protecting Boundaries':
         return <Braces className="w-4 h-4 text-petal-pink" />;
-      case 'Backend Systems':
+      case 'Modeling Persistent State':
         return <Database className="w-4 h-4 text-[#9580D4]" />;
-      case 'Frontend & Design':
+      case 'Making Behavior Visible':
         return <Layout className="w-4 h-4 text-rose-ink" />;
-      case 'Databases & Cache':
+      case 'Understanding Data Flow':
         return <Cpu className="w-4 h-4 text-sky-reflection" />;
-      case 'AI & Data Science':
+      case 'Evaluating Data & Models':
         return <Sparkles className="w-4 h-4 text-bright-lavender" />;
       default:
         return <Sliders className="w-4 h-4 text-deep-plum" />;
@@ -244,10 +173,10 @@ export default function SkillsSection() {
   };
 
   const activeCommentary = skillCommentaries[selectedSkill] || {
-    note: "Building practical software with clear data flow and maintainable implementation choices.",
-    project: "Engineering Portfolio",
-    depth: "Proficient",
-    fact: "Connects the skill to projects, coursework, and hands-on implementation."
+    note: "I use this in projects, coursework, or experiments where its responsibility is visible in the system.",
+    project: "Projects, coursework, and experiments",
+    depth: "Project use",
+    fact: "The toolkit is organized by engineering responsibility rather than a proficiency score."
   };
 
   return (
@@ -349,7 +278,7 @@ export default function SkillsSection() {
                 </div>
                 <div className="flex gap-2 items-center">
                   <span className="font-mono text-[9px] uppercase tracking-wider bg-rose-ink/10 text-rose-ink px-2 py-0.5 rounded">
-                    Practical Proficiency: {activeCommentary.depth}
+                    Evidence: Project use
                   </span>
                 </div>
               </div>
@@ -378,7 +307,3 @@ export default function SkillsSection() {
     </section>
   );
 }
-
-
-
-

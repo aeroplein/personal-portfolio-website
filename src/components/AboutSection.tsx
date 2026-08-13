@@ -4,7 +4,7 @@
  */
 
 import { motion } from 'motion/react';
-import { BookOpen, Compass, Heart, Laptop } from 'lucide-react';
+import { BookOpen, Compass, Laptop, PenLine } from 'lucide-react';
 
 export default function AboutSection() {
   return (
@@ -20,7 +20,7 @@ export default function AboutSection() {
             01 / Identity
           </span>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-deep-plum mt-2">
-            Meet <span className="font-script text-rose-ink text-4xl sm:text-5xl italic font-normal">Pelin Zeynep</span>
+            The parts people rarely see—<span className="font-script text-rose-ink text-4xl sm:text-5xl italic font-normal">but always feel</span>
           </h2>
           <div className="w-16 h-1 bg-petal-pink mt-4 rounded-full mx-auto md:mx-0" />
         </div>
@@ -34,27 +34,31 @@ export default function AboutSection() {
               <div className="absolute top-0 right-0 w-24 h-24 bg-soft-blossom/10 rounded-bl-full pointer-events-none" />
               
                             <h3 className="font-serif text-xl sm:text-2xl font-bold text-deep-plum mb-4 leading-tight">
-                "Software engineering is more than writing algorithms. It is the craft of understanding real problems closely enough to design solutions that genuinely help people. I believe technical work becomes stronger when curiosity, creativity, and the things we enjoy are allowed into the process."
+                Who has access. What changes state. Where data moves. What happens when something fails. Which assumptions a result depends on.
               </h3>
               
                             <p className="font-sans text-base text-deep-plum/80 leading-relaxed">
-                As a fourth-year Computer Engineering student, I am exploring how full-stack development, backend systems, AI, machine learning, and data science can work together to solve meaningful problems.
+                I like turning those invisible rules into something inspectable: a permission model, a packet format, a deterministic score, a preprocessing pipeline, or an interface that makes state easier to understand.
               </p>
               
                             <p className="font-sans text-base text-deep-plum/80 leading-relaxed mt-4">
-                I am equally interested in the academic side of computing: learning the theoretical foundations behind a system, understanding why an approach works, and carrying that knowledge into practical, human-centered solutions. I enjoy connecting systems, data, design, and real user needs to create work that is technically grounded, creatively considered, and genuinely useful.
+                My work moves between backend systems, C++ networking, developer tooling, applied machine learning, and human-centered interfaces. The technologies change, but the underlying questions remain surprisingly consistent.
+              </p>
+
+              <p className="font-sans text-base text-deep-plum/80 leading-relaxed mt-4">
+                This is also why I care about gentle interfaces. Clarity is not decoration. A calm interface, a useful error message, and an honest limitation can all make a system easier to trust, debug, and use.
               </p>
 
               <div className="mt-6 pt-6 border-t border-thistle/30 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-mono text-rose-ink">
-                <span>{'\u2726'} B.S. Senior Candidate</span>
-                <span>{'\u2022'} Systems learner</span>
-                <span>{'\u273F'} Human-centered developer</span>
+                <span>{'\u2726'} Explicit boundaries</span>
+                <span>{'\u2022'} Inspectable state</span>
+                <span>{'\u273F'} Explainable decisions</span>
               </div>
             </div>
 
             {/* Sub-quote block */}
             <div className="border-l-4 border-petal-pink pl-6 py-1 italic font-serif text-lg text-mulberry leading-relaxed">
-              "I believe code should feel like home. Every error message, API route, and hover state is a chance to provide hospitality and clarity to the developer or the end user."
+              "Clarity is not decoration. It is part of making a system easier to trust, debug, and use."
             </div>
           </div>
 
@@ -70,9 +74,9 @@ export default function AboutSection() {
                 <Laptop className="w-5 h-5" />
               </div>
               <div>
-                <h4 className="font-serif font-semibold text-lg text-deep-plum">What I Love Building</h4>
+                <h4 className="font-serif font-semibold text-lg text-deep-plum">Make Boundaries Explicit</h4>
                 <p className="font-sans text-sm text-deep-plum/70 mt-1.5 leading-relaxed">
-                  Fast REST and gRPC backend systems, type-safe compilers, visual state parsers, and machine learning pipelines that process unstructured sentiment logs.
+                  Authentication, authorization, ownership, validation, and honest limits should be visible parts of a system—not assumptions buried inside it.
                 </p>
               </div>
             </motion.div>
@@ -86,9 +90,9 @@ export default function AboutSection() {
                 <BookOpen className="w-5 h-5" />
               </div>
               <div>
-                <h4 className="font-serif font-semibold text-lg text-deep-plum">Academic Focus</h4>
+                <h4 className="font-serif font-semibold text-lg text-deep-plum">Make State Inspectable</h4>
                 <p className="font-sans text-sm text-deep-plum/70 mt-1.5 leading-relaxed">
-                  Compilers, automata theory, data structures, and advanced database indexes. Currently exploring lightweight in-memory caching layers in Rust.
+                  Whether the state is a vision board, learning streak, network packet, audio representation, or cup of ingredients, I want to understand how it changes and becomes visible.
                 </p>
               </div>
             </motion.div>
@@ -102,20 +106,20 @@ export default function AboutSection() {
                 <Compass className="w-5 h-5" />
               </div>
               <div>
-                <h4 className="font-serif font-semibold text-lg text-deep-plum">Currently Exploring</h4>
+                <h4 className="font-serif font-semibold text-lg text-deep-plum">Make Decisions Explainable</h4>
                 <p className="font-sans text-sm text-deep-plum/70 mt-1.5 leading-relaxed">
-                  How editorial layouts can optimize student mental focus on complex tech dashboards, making STEM education workspaces softer and less daunting.
+                  A score, model result, architecture choice, or security claim should have reasoning behind it. I prefer inspectable rules and stated limitations over unexplained confidence.
                 </p>
               </div>
             </motion.div>
 
-            {/* Cute personal stamp */}
+            {/* Current writing note */}
             <div className="bg-soft-blossom border border-petal-pink/20 p-5 rounded-xl-editorial text-center sticker-shadow">
               <p className="font-mono text-[10px] uppercase tracking-widest text-mulberry font-bold flex items-center justify-center gap-1.5">
-                <Heart className="w-3.5 h-3.5 fill-rose-ink stroke-rose-ink" /> Vibe Check
+                <PenLine className="w-3.5 h-3.5" /> A recurring question
               </p>
               <p className="font-sans text-xs text-deep-plum/80 mt-2">
-                Lavender matcha fuel â€¢ 100+ book shelf â€¢ mechanical keyboards with pink accents â€¢ clean compilers
+                Different stacks, same question: what is the system doing, and can someone understand why?
               </p>
             </div>
 

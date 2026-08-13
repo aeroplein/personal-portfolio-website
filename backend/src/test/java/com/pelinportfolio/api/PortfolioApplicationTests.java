@@ -33,11 +33,33 @@ class PortfolioApplicationTests {
 
     @Test
     void seededPortfolioContentCanBeRead() {
-        assertThat(projectService.findAll()).hasSize(7);
+        assertThat(projectService.findAll())
+                .extracting(project -> project.id())
+                .containsExactly(
+                        "auraboard",
+                        "sshtunneling",
+                        "overengineering-detector",
+                        "codeyourtree",
+                        "stegodetector",
+                        "generative-xai-adhd",
+                        "music-genre-detection",
+                        "frantic-barista",
+                        "university-automation-system",
+                        "mnist-digit-recognition",
+                        "cervical-cancer-prediction"
+                );
         assertThat(projectService.findById("auraboard").title())
-                .isEqualTo("AuraBoard - Digital Vision Board SaaS");
-        assertThat(skillService.findAll()).hasSize(25);
-        assertThat(researchService.findAll()).hasSize(3);
+                .isEqualTo("Aura Board - Full-Stack Collaborative Vision-Board App");
+        assertThat(projectService.findById("codeyourtree").role())
+                .isEqualTo("Technical Software Project");
+        assertThat(projectService.findById("stegodetector").takeaway())
+                .contains("80% classification accuracy");
+        assertThat(projectService.findById("mnist-digit-recognition").takeaway())
+                .contains("97.81% test accuracy");
+        assertThat(projectService.findById("cervical-cancer-prediction").takeaway())
+                .contains("not as a clinically validated model");
+        assertThat(skillService.findAll()).hasSize(38);
+        assertThat(researchService.findAll()).hasSize(4);
     }
 
     @Test

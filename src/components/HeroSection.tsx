@@ -1,16 +1,14 @@
-/**
+﻿/**
  * @license
  * SPDX-License-Identifier: Apache-2.0
  */
 
 import { motion } from 'motion/react';
-import { ArrowUpRight, ChevronRight, FileCode, Star } from 'lucide-react';
-import HeroCollage from './HeroCollage';
+import { ArrowUpRight, ChevronRight, Star } from 'lucide-react';
 
 interface HeroSectionProps {
   onNavigate: (sectionId: string) => void;
 }
-
 export default function HeroSection({ onNavigate }: HeroSectionProps) {
   return (
     <section
@@ -22,9 +20,9 @@ export default function HeroSection({ onNavigate }: HeroSectionProps) {
       <div className="absolute -bottom-16 right-1/4 w-[400px] h-[400px] rounded-full bg-soft-blossom/20 blur-3xl pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-6 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <div className="max-w-4xl">
           {/* Hero Content Text Left-Side */}
-          <div className="lg:col-span-7 flex flex-col justify-center">
+          <div className="flex flex-col justify-center">
             
             {/* Elegant tiny floating banner */}
             <motion.div
@@ -34,7 +32,7 @@ export default function HeroSection({ onNavigate }: HeroSectionProps) {
               className="inline-flex items-center gap-1.5 self-start bg-soft-blossom/30 border border-petal-pink/30 text-rose-ink px-3 py-1.5 rounded-full font-mono text-[11px] font-semibold tracking-wider uppercase mb-6"
             >
               <Star className="w-3 h-3 text-petal-pink fill-petal-pink" />
-              <span>Computer Engineering Candidate ✿ 2026</span>
+              <span>Computer Engineering {'\u273F'} Backend, Systems &amp; ML</span>
             </motion.div>
 
             {/* Title with Sacramento calligraphy script accent */}
@@ -44,7 +42,7 @@ export default function HeroSection({ onNavigate }: HeroSectionProps) {
               transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="font-serif text-4xl sm:text-5xl lg:text-6xl text-deep-plum font-bold tracking-tight leading-[1.08] mb-6"
             >
-              Building <span className="font-script text-petal-pink font-normal lowercase tracking-wide text-5xl sm:text-6xl lg:text-7xl block sm:inline-block md:-mr-2">thoughtful</span> software with a soft spot for data, design, and clean engineering.
+              I make the <span className="font-script text-petal-pink font-normal lowercase tracking-wide text-5xl sm:text-6xl lg:text-7xl block sm:inline-block md:-mr-2">invisible</span> parts of software <span className="font-script text-petal-pink font-normal lowercase tracking-wide text-5xl sm:text-6xl lg:text-7xl">visible.</span>
             </motion.h1>
 
             {/* Subheadline sentence */}
@@ -52,9 +50,9 @@ export default function HeroSection({ onNavigate }: HeroSectionProps) {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="font-sans text-lg text-mulberry font-medium leading-relaxed max-w-2xl mb-10"
+              className="font-sans text-lg text-mulberry font-medium leading-relaxed max-w-4xl mb-10"
             >
-              Hi, I’m Pelin Zeynep Kaya, a Computer Engineering student exploring backend development, full-stack applications, and AI/data-driven projects.
+              Across backend engineering, systems programming, developer tools, and applied machine learning, I turn hidden behavior into explicit boundaries, visible state, and decisions people can inspect.
             </motion.p>
 
             {/* CTAs */}
@@ -86,27 +84,23 @@ export default function HeroSection({ onNavigate }: HeroSectionProps) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.5 }}
-              className="mt-14 pt-8 border-t border-thistle/20 grid grid-cols-3 gap-4"
+              className="mt-14 pt-8 border-t border-thistle/20 grid grid-cols-2 gap-x-6 gap-y-6 md:grid-cols-3 md:gap-4"
             >
               <div>
-                <span className="block font-serif text-2xl font-semibold text-deep-plum">3.89</span>
-                <span className="block font-mono text-[10px] text-rose-ink uppercase tracking-wider mt-1">Cumulative GPA</span>
-              </div>
-              <div>
-                <span className="block font-serif text-2xl font-semibold text-deep-plum">6+</span>
-                <span className="block font-mono text-[10px] text-rose-ink uppercase tracking-wider mt-1">Tech Stacks</span>
+                <span className="block font-serif text-2xl font-semibold text-deep-plum">3.88/4.00</span>
+                <span className="block font-mono text-[10px] text-rose-ink uppercase tracking-wider mt-1">CGPA</span>
               </div>
               <div>
                 <span className="block font-serif text-2xl font-semibold text-deep-plum">100%</span>
-                <span className="block font-mono text-[10px] text-rose-ink uppercase tracking-wider mt-1">Feminine Dev Soul</span>
+                <span className="block font-mono text-[10px] text-rose-ink uppercase tracking-wider mt-1">ÖSYM Scholarship</span>
+              </div>
+              <div className="col-span-2 md:col-span-1">
+                <span className="block whitespace-nowrap font-serif text-xl lg:text-2xl font-semibold text-deep-plum">Backend · Systems · ML</span>
+                <span className="block font-mono text-[10px] text-rose-ink uppercase tracking-wider mt-1">Project Range</span>
               </div>
             </motion.div>
           </div>
 
-          {/* Hero Interactive Sticker Collage Right-Side */}
-          <div className="lg:col-span-5 w-full flex items-center justify-center">
-            <HeroCollage />
-          </div>
         </div>
       </div>
     </section>

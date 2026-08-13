@@ -39,207 +39,249 @@ public class SeedDataConfig {
         return List.of(
                 new Project(
                         "auraboard",
-                        "AuraBoard - Digital Vision Board SaaS",
-                        "An interactive digital vision board platform built with an ASP.NET Core Web API, PostgreSQL, and a responsive Vite + React frontend. It supports custom board layouts, authenticated ownership boundaries, uploaded assets, and external media integrations.",
-                        List.of("C#", "ASP.NET Core", "Entity Framework Core", "PostgreSQL", "React", "Vite", "Spotify API"),
-                        "https://github.com/pelinzkaya/aura.board",
+                        "Aura Board - Full-Stack Collaborative Vision-Board App",
+                        "Aura Board turns a familiar creative product into a real full-stack engineering problem: who owns a board, who can collaborate on it, and how is that state kept secure and persistent? Built with ASP.NET Core, PostgreSQL, Entity Framework Core, Vite, and vanilla JavaScript, it supports visual goal boards with draggable notes, quotes, and images. Owners control settings and invitations, while collaborators contribute to board content within clear permission boundaries.",
+                        List.of("ASP.NET Core", "PostgreSQL", "EF Core", "Vite", "Vanilla JavaScript"),
+                        "https://github.com/aeroplein/aura.board",
                         null,
                         null,
                         true,
                         1,
-                        "Full-Stack Developer",
-                        "Built a decoupled full-stack application with persistent board state, secure API boundaries, and a UI focused on personal planning and creative organization.",
+                        "Full-Stack Developer · Student Portfolio Project",
+                        "HttpOnly cookie authentication, relational data modeling, server-side validation, EF Core migrations, permission-aware API design, and resilient local fallbacks for optional Gemini-assisted ideas and media features. Built with real authentication and data controls, but not presented as production SaaS.",
                         "soft-blossom",
                         "Full-Stack & Cloud",
                         """
-                        [Authorize]
-                        [ApiController]
-                        [Route("api/[controller]")]
-                        public class BoardsController : BaseApiController {
-                            private readonly IBoardService _boardService;
-
-                            [HttpPost("{id}/sync")]
-                            public async Task<IActionResult> SyncItems(Guid id, [FromBody] List<BoardItemDto> items) {
-                                var result = await _boardService.UpdateZIndexAndPositionsAsync(id, items, User.GetUserId());
-                                return result.IsSuccess ? Ok(result) : BadRequest(result.Error);
-                            }
-                        }"""
+                        // Engineering notes
+                        Authentication: HttpOnly cookie sessions
+                        Permissions: owner and collaborator boundaries
+                        Persistence: PostgreSQL + EF Core migrations
+                        Validation: server-side API boundaries
+                        Fallbacks: core experience remains usable without external services"""
                 ),
                 new Project(
                         "codeyourtree",
-                        "CodeYourTree - Gamified Academic Platform",
-                        "A gamified academic sharing platform designed around a Spring Boot backend, secured API endpoints, and dynamic progress visualization for student learning activity.",
-                        List.of("Java", "Spring Boot", "Spring Security", "JWT Auth", "PostgreSQL", "Svelte/Vanilla JS"),
-                        "https://github.com/pelinzkaya/CodeYourTree",
+                        "CodeYourTree",
+                        "A technical software project built with Java 21, Spring Boot, Spring Security, PostgreSQL, and HTML5 Canvas. I developed REST APIs, JWT-based authentication, user and progress management, and visual streak tracking.",
+                        List.of("Java 21", "Spring Boot", "Spring Security", "PostgreSQL", "HTML5 Canvas"),
+                        "https://github.com/aeroplein/CodeYourTree",
+                        null,
+                        null,
+                        false,
+                        4,
+                        "Technical Software Project",
+                        "Turns user progress and streak data into persistent, visible state while keeping authentication and progress-management responsibilities explicit.",
+                        "ivory",
+                        "Full-Stack & Cloud",
+                        """
+                        // Engineering notes
+                        API: REST endpoints
+                        Security: JWT-based authentication
+                        State: user and progress management
+                        Visualization: streak tracking with HTML5 Canvas"""
+                ),
+                new Project(
+                        "sshtunneling",
+                        "Secure Tunneling Simulation",
+                        "A native C++ networking simulation built around framed packets, bidirectional socket routing, concurrent client sessions, and cryptographic concepts. The implementation defines an explicit packet structure, routes traffic in both directions using select, handles client sessions concurrently, and uses OpenSSL primitives including AES-256-CTR and HMAC-SHA256. A multi-client transfer test exercises the network flow.",
+                        List.of("C++", "POSIX Sockets", "OpenSSL", "Packet Framing", "Concurrency"),
+                        "https://github.com/aeroplein/SSH-Tunneling",
                         null,
                         null,
                         true,
                         2,
-                        "Product Owner & Scrum Master",
-                        "Led planning and delivery while working through authentication, endpoint protection, database integrity, and user-progress visualization concerns.",
-                        "ivory",
-                        "Full-Stack & Cloud",
-                        """
-                        @Configuration
-                        @EnableWebSecurity
-                        public class SecurityConfig {
-                            @Bean
-                            public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-                                http.csrf(csrf -> csrf.disable())
-                                    .authorizeHttpRequests(auth -> auth
-                                        .requestMatchers("/api/v1/auth/**").permitAll()
-                                        .anyRequest().authenticated()
-                                    )
-                                    .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                                    .authenticationProvider(authenticationProvider)
-                                    .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-                                return http.build();
-                            }
-                        }"""
-                ),
-                new Project(
-                        "sshtunneling",
-                        "Secure SSH Tunneling Simulation Engine",
-                        "A native C++ infrastructure project simulating secure shell tunneling, remote port forwarding mechanics, and full-duplex packet routing with cryptographic key-exchange components.",
-                        List.of("C++", "Diffie-Hellman", "Cryptography", "Socket Programming", "Makefile"),
-                        "https://github.com/pelinzkaya/SSH-Tunneling",
-                        "https://github.com/pelinzkaya/SSH-Tunneling#artifacts",
-                        null,
-                        true,
-                        3,
-                        "Systems Engineer",
-                        "Practiced low-level networking, socket lifecycle management, memory-conscious buffer handling, and encryption wrapper design in a systems programming context.",
+                        "Systems Engineering · Learning Project",
+                        "Demonstrates systems programming, network state, concurrency, packet framing, and cryptographic boundaries. This is not the SSH protocol or a production security product; it is a learning system for understanding routing and the limits of unauthenticated key exchange.",
                         "soft-wisteria",
                         "Backend & Systems",
                         """
-                        #ifndef CRYPTO_MANAGER_HPP
-                        #define CRYPTO_MANAGER_HPP
-
-                        #include <vector>
-                        #include <string>
-
-                        class CryptoManager {
-                        public:
-                            std::vector<uint8_t> encryptAES(const std::string& plaintext, const std::vector<uint8_t>& secretKey);
-                            std::string decryptAES(const std::vector<uint8_t>& ciphertext, const std::vector<uint8_t>& secretKey);
-                        };
-
-                        #endif"""
+                        // Engineering notes
+                        Packet structure: explicit framed messages
+                        Routing: bidirectional flow with select
+                        Concurrency: per-client sessions
+                        Primitives: AES-256-CTR + HMAC-SHA256
+                        Boundary: learning simulation, not the SSH protocol"""
+                ),
+                new Project(
+                        "stegodetector",
+                        "StegoDetector - Hybrid Image Steganalysis & Threat Detection",
+                        "Developed as an academic team project, StegoDetector is a hybrid image steganalysis system for detecting hidden information in digital images. It combines statistical image analysis with ensemble machine learning to identify suspicious patterns associated with steganographic manipulation. The project includes feature extraction and diagnostic pipelines using OpenCV and NumPy, a Soft Voting Ensemble combining XGBoost and Random Forest models, and Streamlit visualizations for inspecting predictions, extracted features, and model behavior during evaluation.",
+                        List.of("Python", "Scikit-learn", "XGBoost", "OpenCV", "NumPy", "Streamlit"),
+                        "https://github.com/aeroplein/image-steganography-and-staganalysis",
+                        null,
+                        null,
+                        false,
+                        5,
+                        "Academic Team Project",
+                        "Achieved 80% classification accuracy. Demonstrates applied machine learning, image processing, cybersecurity thinking, feature engineering, model evaluation, and diagnostic tooling. Presented as a portfolio-scale detection project, not a production security system.",
+                        "soft-blossom",
+                        "AI & Data Science",
+                        """
+                        # Evaluation notes
+                        feature_extraction = "OpenCV + NumPy"
+                        ensemble = "XGBoost + Random Forest"
+                        inspection = "Streamlit diagnostics"
+                        classification_accuracy = "80%"
+                        scope = portfolio-scale detection project"""
                 ),
                 new Project(
                         "generative-xai-adhd",
-                        "Generative XAI ADHD-EEG Pipeline",
-                        "A generative explainable AI research pipeline for pediatric EEG signal analysis, exploring diffusion-style modeling, stationarity evaluation, and interpretable neural signal workflows.",
-                        List.of("Python", "PyTorch", "Diffusion Transformers", "D4PM", "EEG Stationarity", "XAI"),
-                        "https://github.com/pelinzkaya/Generative-XAI-ADHD-EEG",
-                        "https://github.com/pelinzkaya/Generative-XAI-ADHD-EEG#results",
+                        "Generative XAI for ADHD-EEG",
+                        "A research-oriented PyTorch experiment exploring generative modeling and explainability questions in pediatric EEG analysis. The work centers on what would make an experiment interpretable: preprocessing, subject-level splits, baselines, reproducibility, explainability methods, and clearly stated limitations.",
+                        List.of("Python", "PyTorch", "EEG Analysis", "Generative Modeling", "XAI"),
+                        "https://github.com/aeroplein/Generative-XAI-ADHD-EEG",
                         null,
-                        true,
-                        4,
-                        "AI Researcher & Developer",
-                        "Explored deep learning research implementation patterns for sensitive neurological data, with emphasis on model structure, reproducibility, and interpretable outputs.",
+                        null,
+                        false,
+                        6,
+                        "Research-Oriented Implementation",
+                        "Asks what evidence is required before a model output can be understood or trusted. It does not imply diagnosis, clinical validity, publication, or validated results.",
                         "ivory",
                         "AI & Data Science",
                         """
-                        import torch
-                        import torch.nn as nn
-                        from models.transformer import DiffusionTransformer
-
-                        class D4PMEEGEngine(nn.Module):
-                            def __init__(self, channels=19, seq_len=512):
-                                super().__init__()
-                                self.transformer = DiffusionTransformer(input_dim=channels, depth=6)
-                                self.bias_firewall = nn.Linear(seq_len, seq_len)
-
-                            def forward(self, x_t, timesteps, condition=None):
-                                eps_theta = self.transformer(x_t, timesteps, cond=condition)
-                                return self.bias_firewall(eps_theta)"""
+                        # Experiment framing
+                        focus = [
+                            "preprocessing",
+                            "subject-level splits",
+                            "baselines and reproducibility",
+                            "explainability methods",
+                            "clearly stated limitations",
+                        ]"""
                 ),
                 new Project(
                         "overengineering-detector",
-                        "Overengineering Detector Engine",
-                        "An architectural analysis platform that inspects repository structures to flag structural complexity, unnecessary abstraction, and codebase patterns that make student projects harder to maintain.",
-                        List.of("Node.js", "Express", "JavaScript", "PostgreSQL", "Mermaid.js", "API Architecture"),
-                        "https://github.com/pelinzkaya/Overengineering-Detector",
+                        "Overengineering Detector",
+                        "A rule-based architecture tool that compares stack complexity with project scale and usage context. Instead of treating “overengineered” as an opinion, the system uses inspectable criteria to produce deterministic scores, risk flags, recommendations, what-if scenarios, and persisted analysis history. It also distinguishes excessive complexity from systems that may be too simple for their requirements.",
+                        List.of("Node.js", "Express", "JavaScript", "PostgreSQL", "Rule-Based Scoring"),
+                        "https://github.com/aeroplein/Overengineering-Detector",
                         null,
                         null,
                         true,
-                        5,
-                        "Sole Architect",
-                        "Created deterministic scoring logic and visual dependency mapping to turn vague maintainability concerns into concrete, discussable engineering signals.",
+                        3,
+                        "Backend & Architecture Implementation",
+                        "Analyses are ownership-filtered, related results are stored transactionally, and scoring thresholds are covered by tests. Demonstrates domain modeling, deterministic reasoning, authorization, testable thresholds, and product judgment.",
                         "soft-wisteria",
                         "Backend & Systems",
                         """
-                        const analysisService = require('./services/analysisService');
-                        const scoringService = require('./services/scoringService');
-
-                        exports.analyzeRepo = async (req, res, next) => {
-                            try {
-                                const { repositoryUrl } = req.body;
-                                const structuralTree = await analysisService.cloneAndParse(repositoryUrl);
-                                const complexityMetrics = scoringService.evaluateOverengineering(structuralTree);
-                                return res.status(200).json({ success: true, metrics: complexityMetrics });
-                            } catch (err) {
-                                next(err);
-                            }
-                        };"""
+                        // Engineering notes
+                        Source of truth: deterministic scoring rules
+                        Inputs: stack complexity, scale, and usage context
+                        Outputs: scores, flags, recommendations, and what-if scenarios
+                        Persistence: ownership-filtered analysis history
+                        Evaluation: test-covered thresholds"""
                 ),
                 new Project(
                         "music-genre-detection",
-                        "Deep Learning Music Genre Classifier",
-                        "A deep learning audio classification project that extracts spectral and temporal features from acoustic data and trains neural models for music genre recognition.",
-                        List.of("Python", "TensorFlow", "Keras", "Librosa", "Audio Processing", "TensorBoard"),
-                        "https://github.com/pelinzkaya/Deep-Learning-Music-Genre_Detection",
-                        "https://github.com/pelinzkaya/Deep-Learning-Music-Genre_Detection#logs",
+                        "Music Genre Classification",
+                        "Developed as an academic team project, this audio-ML pipeline segments tracks, extracts 40-coefficient MFCC sequences with Librosa, stores processed data in HDF5, and explores a TensorFlow/Keras CNN-LSTM model. The preprocessing work is inspectable. Final reproducible evaluation is still in progress, so the project is presented as an experiment pipeline rather than a completed classifier.",
+                        List.of("Python", "TensorFlow", "Keras", "Librosa", "MFCC", "HDF5"),
+                        "https://github.com/aeroplein/Deep-Learning-Music-Genre_Detection",
                         null,
-                        true,
-                        6,
-                        "Deep Learning Engineer",
-                        "Worked through audio preprocessing, mel-spectrogram feature extraction, sequential neural networks, and experiment logging for model evaluation.",
+                        null,
+                        false,
+                        7,
+                        "Academic Team Project",
+                        "Exposes the representation and data decisions that happen before a model produces an answer. No final accuracy metric is claimed.",
                         "soft-blossom",
                         "AI & Data Science",
                         """
-                        import tensorflow as tf
-                        import librosa
-
-                        def build_mel_classifier(input_shape, num_classes=10):
-                            model = tf.keras.Sequential([
-                                tf.keras.layers.Input(shape=input_shape),
-                                tf.keras.layers.Conv2D(32, (3, 3), activation='relu', padding='same'),
-                                tf.keras.layers.MaxPooling2D((2, 2)),
-                                tf.keras.layers.Flatten(),
-                                tf.keras.layers.Dense(128, activation='relu'),
-                                tf.keras.layers.Dense(num_classes, activation='softmax')
-                            ])
-                            return model"""
+                        # Pipeline notes
+                        audio_window = "3-second segments"
+                        representation = "40-coefficient MFCC sequences"
+                        storage = "HDF5"
+                        model_direction = "TensorFlow/Keras CNN-LSTM"
+                        status = final reproducible evaluation in progress"""
                 ),
                 new Project(
                         "frantic-barista",
-                        "Frantic Barista - Interactive Simulator",
-                        "An arcade-style simulation game rendered with custom Canvas logic, resource queues, customer satisfaction state, and recipe-mixing interactions under a timed loop.",
-                        List.of("TypeScript", "JavaScript (ES6)", "HTML5 Canvas", "Vite", "Tailwind CSS"),
-                        "https://github.com/pelinzkaya/frantic-barista",
+                        "Frantic Barista",
+                        "An early Canvas interaction prototype with a JavaScript Cup entity that models espresso, oat milk, and berry syrup as state and renders their proportions as visible layers. The surrounding interface establishes orders, timing, score, and patience concepts, but a complete game loop and customer system are not yet present.",
+                        List.of("JavaScript", "HTML5 Canvas", "Vite", "Tailwind CSS"),
+                        "https://github.com/aeroplein/frantic-barista",
                         null,
                         null,
-                        true,
-                        7,
-                        "Game Systems Designer",
-                        "Practiced frame-rate independent updates, object-oriented game state, active rendering entities, and lightweight client-side interaction design.",
+                        false,
+                        8,
+                        "Interaction Prototype",
+                        "Translates internal ingredient state into an immediate visual representation while stating the prototype boundary clearly.",
                         "soft-blossom",
                         "Interactive Apps",
                         """
-                        export class Cup {
-                            constructor(x, y, size) {
-                                this.x = x;
-                                this.y = y;
-                                this.size = size;
-                                this.ingredients = [];
-                            }
-
-                            addIngredient(ingredient, amount) {
-                                this.ingredients.push({ name: ingredient, qty: amount });
-                            }
-                        }"""
+                        // Prototype notes
+                        State: espresso, oat milk, and berry syrup ratios
+                        Rendering: layered ingredient proportions on Canvas
+                        UI concepts: orders, timing, score, and patience
+                        Boundary: complete game loop and customer system not yet present"""
+                ),
+                new Project(
+                        "university-automation-system",
+                        "University Automation System",
+                        "An academic Java Swing desktop application that models university operations through separate Admin, Instructor, and Student dashboards. It organizes the code into model, data, and UI layers, uses a singleton DataStore for structured text-file persistence, and supports users, departments, courses, enrollments, grade entry, transcripts, GPA calculation, reports, and role-specific navigation.",
+                        List.of("Java", "Swing", "FlatLaf", "File Persistence", "MVC"),
+                        "https://github.com/aeroplein/university-automation-system",
+                        null,
+                        null,
+                        false,
+                        9,
+                        "Academic Desktop Application",
+                        "Makes role boundaries and academic workflows explicit through separate dashboards, validation rules, and immediately persisted records. Its file-based storage and local credential model keep the scope clearly educational rather than production-grade.",
+                        "ivory",
+                        "Software Systems",
+                        """
+                        // Architecture notes
+                        Interface: Java Swing + FlatLaf
+                        Navigation: CardLayout + role-specific dashboards
+                        State: singleton DataStore
+                        Persistence: structured text files
+                        Workflows: enrollment, grading, transcripts, and GPA
+                        Boundary: academic desktop application"""
+                ),
+                new Project(
+                        "mnist-digit-recognition",
+                        "MNIST Handwritten Digit Recognition",
+                        "A compact TensorFlow/Keras learning project covering the full supervised-learning pipeline for handwritten-digit classification. It loads the standard MNIST train and test sets, flattens each 28×28 image into 784 features, normalizes pixel values, one-hot encodes labels, trains a 128–64–10 dense network, evaluates the held-out test set, and visualizes training and validation behavior.",
+                        List.of("Python", "TensorFlow", "Keras", "NumPy", "Matplotlib"),
+                        "https://github.com/aeroplein/MNIST-Handwritten-Digit-Recognition",
+                        null,
+                        null,
+                        false,
+                        10,
+                        "Machine Learning Project",
+                        "The repository reports 97.81% test accuracy after 10 epochs with a batch size of 128. Demonstrates preprocessing, model construction, evaluation, and diagnostic plotting while remaining a baseline MLP rather than an image-specific CNN.",
+                        "soft-wisteria",
+                        "AI & Data Science",
+                        """
+                        # Model notes
+                        input = "28×28 pixels → 784 normalized features"
+                        architecture = "Dense(128) → Dense(64) → Softmax(10)"
+                        optimizer = "Adam"
+                        training = "10 epochs · batch size 128"
+                        reported_test_accuracy = "97.81%"
+                        """
+                ),
+                new Project(
+                        "cervical-cancer-prediction",
+                        "Cervical Cancer Risk Prediction",
+                        "A scikit-learn classification experiment using the Dx:Cancer target from a cervical-cancer risk-factor dataset. The pipeline converts values to numeric form, replaces missing entries with feature medians, creates a 70/30 train-test split, and evaluates a hard-voting ensemble of Logistic Regression, K-Nearest Neighbors, and Decision Tree models with a classification report.",
+                        List.of("Python", "Scikit-learn", "Pandas", "NumPy", "VotingClassifier"),
+                        "https://github.com/aeroplein/Cervical-Cancer-Prediction",
+                        null,
+                        null,
+                        false,
+                        11,
+                        "Machine Learning Experiment",
+                        "The repository reports approximately 99.6% accuracy on one split, with six positive examples in the displayed test report. I present it as practice in missing-data handling, class imbalance, ensemble evaluation, and limitation-aware reporting—not as a clinically validated model.",
+                        "soft-blossom",
+                        "AI & Data Science",
+                        """
+                        # Evaluation notes
+                        missing_values = "numeric conversion + median imputation"
+                        split = "70% train · 30% test · random_state 42"
+                        ensemble = "Logistic Regression + KNN + Decision Tree"
+                        voting = "hard"
+                        reported_accuracy = "~99.6% on one split"
+                        positive_test_examples = 6
+                        scope = "learning experiment, not clinical validation"""
                 )
         );
     }
@@ -248,24 +290,26 @@ public class SeedDataConfig {
         List<Skill> skills = new ArrayList<>();
         int order = 1;
 
-        order = addSkills(skills, "Languages", order,
-                "TypeScript / JS|expert", "Rust|familiar", "Python|fluent",
-                "C / C++|fluent", "SQL|fluent");
-        order = addSkills(skills, "Backend Systems", order,
-                "Node.js / Express|expert", "FastAPI / Flask|fluent",
-                "gRPC & Protocol Buffers|familiar", "RESTful Architecture|expert");
-        order = addSkills(skills, "Frontend & Design", order,
-                "React 19 & Next.js|expert", "Tailwind CSS v4|expert",
-                "Figma Prototyping|fluent", "Motion / Framer Motion|fluent");
-        order = addSkills(skills, "Databases & Cache", order,
-                "PostgreSQL|expert", "RocksDB / LevelDB|familiar",
-                "Redis Cache Layer|fluent", "MongoDB / JSON Stores|fluent");
-        order = addSkills(skills, "AI & Data Science", order,
-                "scikit-learn Classifier|fluent", "Pandas & NumPy Stack|expert",
-                "PyTorch Basics|familiar", "Data Visualisation (D3 / Recharts)|fluent");
-        addSkills(skills, "Tools & DevOps", order,
-                "Git & GitHub Actions|expert", "Docker Containerization|fluent",
-                "Linux Command Line|expert", "Vite & Bundler Systems|expert");
+        order = addSkills(skills, "Protecting Boundaries", order,
+                "C#|fluent", "ASP.NET Core|fluent", "Spring Security|fluent",
+                "JWT and cookie authentication|fluent", "Authorization|fluent",
+                "DTO validation|fluent", "Error handling|fluent");
+        order = addSkills(skills, "Modeling Persistent State", order,
+                "PostgreSQL|fluent", "Microsoft SQL Server|fluent",
+                "Entity Framework Core|fluent", "JPA/Hibernate|fluent",
+                "Transactions|fluent", "Migrations|fluent", "Constraints|fluent");
+        order = addSkills(skills, "Understanding Data Flow", order,
+                "C|fluent", "C++|fluent", "POSIX sockets|fluent",
+                "Packet framing|fluent", "Threads|fluent", "select|fluent",
+                "Buffer handling|fluent", "OpenSSL concepts|fluent");
+        order = addSkills(skills, "Evaluating Data & Models", order,
+                "Python|fluent", "TensorFlow/Keras|fluent", "PyTorch|fluent",
+                "Pandas|fluent", "Librosa|fluent", "MFCC preprocessing|fluent",
+                "HDF5|fluent", "Experiment design|fluent");
+        addSkills(skills, "Making Behavior Visible", order,
+                "TypeScript|fluent", "JavaScript|fluent", "React|fluent",
+                "Vite|fluent", "HTML|fluent", "CSS|fluent", "Canvas|fluent",
+                "API integration|fluent");
 
         return skills;
     }
@@ -283,8 +327,8 @@ public class SeedDataConfig {
         return List.of(
                 new ResearchItem(
                         "res-1",
-                        "Developer Ergonomics & Compiler UX",
-                        "Researching how error compiler logs and live visual trees (AST) influence programmer debugging speeds and mental anxiety in early stem education.",
+                        "Developer Ergonomics and Compiler UX",
+                        "How can error messages and visual representations of program structure make debugging easier to understand for early learners?",
                         null,
                         "Research interest",
                         null,
@@ -293,8 +337,8 @@ public class SeedDataConfig {
                 ),
                 new ResearchItem(
                         "res-2",
-                        "Resource-Constrained Cache Policies",
-                        "Exploring custom predictive caching mechanisms at the systems layer, marrying Bloom filters with LRU policies to decrease memory bloat on personal IoT micro-servers.",
+                        "Resource-Aware Caching",
+                        "When can probabilistic membership checks and recency-based eviction reduce wasted memory on small systems?",
                         null,
                         "Research interest",
                         null,
@@ -303,13 +347,23 @@ public class SeedDataConfig {
                 ),
                 new ResearchItem(
                         "res-3",
-                        "Feminine & Soft Human-AI Cooperations",
-                        "Investigating how softer, editorial layouts and cozy web ecosystems impact focus and information retention compared to brutalist or over-masculinized dark panels commonly found in developer software.",
+                        "Human-Centered AI Interfaces",
+                        "How can calmer visual systems improve focus and comprehension without reducing technical depth?",
                         null,
                         "Research interest",
                         null,
                         "Heart",
                         3
+                ),
+                new ResearchItem(
+                        "res-4",
+                        "Explainable Biomedical ML",
+                        "What preprocessing, evaluation, and limitation reporting should be required before an EEG model’s output can be meaningfully interpreted?",
+                        null,
+                        "Research interest",
+                        null,
+                        "BookOpen",
+                        4
                 )
         );
     }

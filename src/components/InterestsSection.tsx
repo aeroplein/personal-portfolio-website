@@ -7,13 +7,15 @@ import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import { Sparkles, Database, Heart, BookOpen, Quote } from 'lucide-react';
 import { researchInterests } from '../data';
-import { getResearch } from '../api/portfolioApi';
+import { getResearch, hasPortfolioApi } from '../api/portfolioApi';
 import type { ResearchInterest } from '../types';
 
 export default function InterestsSection() {
   const [researchItems, setResearchItems] = useState<ResearchInterest[]>(researchInterests);
 
   useEffect(() => {
+    if (!hasPortfolioApi) return;
+
     getResearch()
       .then(setResearchItems)
       .catch((error) => {
@@ -46,7 +48,7 @@ export default function InterestsSection() {
           {/* Left: Philosophy block and magazine callout */}
           <div className="lg:col-span-5 space-y-6">
             <span className="font-mono text-xs uppercase tracking-widest text-petal-pink font-semibold block">
-              06 / Academic Inquiry
+              07 / Academic Inquiry
             </span>
             <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-deep-plum leading-tight">
               Research & Future <span className="font-script text-petal-pink text-4xl sm:text-5xl italic font-normal">Endeavors</span>
@@ -54,20 +56,20 @@ export default function InterestsSection() {
             <div className="w-16 h-1 bg-petal-pink mt-4 rounded-full" />
 
             <p className="font-sans text-sm sm:text-base text-deep-plum/80 leading-relaxed pt-2">
-              My engineering education forms the engine, but curiosity feeds the fuel. I suspect that the next great paradigm shifts in software design will not only focus on faster execution speeds, but on creating accessible, inclusive cognitive models.
+              I’m interested in questions at the boundary between technical systems and human understanding. Some are active experiments; others are directions I want to investigate more rigorously.
             </p>
 
             {/* Cozy quotation callout card */}
             <div className="bg-soft-blossom/20 border border-petal-pink/20 p-6 rounded-xl-editorial shadow-xs relative">
               <Quote className="absolute -top-3 -left-2 w-8 h-8 text-petal-pink/30 stroke-[3px]" />
               <p className="font-serif italic text-base text-mulberry leading-relaxed">
-                "We represent code as dynamic flows. When compilers are structured visually, the translation of instructions transitions from a dry mechanism to a story of flow."
+                "What is the system doing, and can someone understand why?"
               </p>
               <div className="mt-3 flex items-center gap-2">
                 <div className="w-5 h-5 rounded-full bg-petal-pink/20 flex items-center justify-center">
                   <span className="text-petal-pink font-serif text-[10px]">✿</span>
                 </div>
-                <span className="font-mono text-[10px] uppercase font-bold text-rose-ink">Research thesis proposal, 2026</span>
+                <span className="font-mono text-[10px] uppercase font-bold text-rose-ink">A recurring research question</span>
               </div>
             </div>
           </div>

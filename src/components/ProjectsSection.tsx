@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { FolderGit2, ExternalLink, Terminal, ChevronDown, ChevronUp, Cpu, Flame, Code2 } from 'lucide-react';
 import { projects } from '../data';
 import { Project } from '../types';
-import { getProjects } from '../api/portfolioApi';
+import { getProjects, hasPortfolioApi } from '../api/portfolioApi';
 
 export default function ProjectsSection() {
   const [filter, setFilter] = useState<string>('all');
@@ -16,6 +16,8 @@ export default function ProjectsSection() {
   const [projectItems, setProjectItems] = useState<Project[]>(projects);
 
   useEffect(() => {
+    if (!hasPortfolioApi) return;
+
     getProjects()
       .then(setProjectItems)
       .catch((error) => {
@@ -169,13 +171,13 @@ export default function ProjectsSection() {
                         </div>
 
                         {/* CTA / Action Buttons */}
-                        <div className="flex flex-wrap gap-3 pt-4">
+                        <div className="flex flex-col gap-3 pt-4 sm:flex-row sm:flex-wrap">
                           {project.github && (
                             <a
                               href={project.github}
                               target="_blank"
                               referrerPolicy="no-referrer"
-                              className="inline-flex items-center gap-1.5 bg-mulberry hover:bg-rose-ink text-ivory px-4 py-2 rounded-full font-serif font-medium text-xs tracking-wide transition-all shadow-sm cursor-pointer"
+                              className="inline-flex w-full items-center justify-center gap-1.5 bg-mulberry hover:bg-rose-ink text-ivory px-4 py-2 rounded-full font-serif font-medium text-xs tracking-wide transition-all shadow-sm cursor-pointer sm:w-auto"
                             >
                               <FolderGit2 className="w-3.5 h-3.5 text-soft-blossom" />
                               <span>Source Code</span>
@@ -187,7 +189,7 @@ export default function ProjectsSection() {
                               href={project.demo}
                               target="_blank"
                               referrerPolicy="no-referrer"
-                              className="inline-flex items-center gap-1.5 bg-ivory/85 border border-thistle/60 hover:bg-soft-wisteria text-deep-plum px-4 py-2 rounded-full font-sans font-semibold text-xs tracking-wide transition-all cursor-pointer"
+                              className="inline-flex w-full items-center justify-center gap-1.5 bg-ivory/85 border border-thistle/60 hover:bg-soft-wisteria text-deep-plum px-4 py-2 rounded-full font-sans font-semibold text-xs tracking-wide transition-all cursor-pointer sm:w-auto"
                             >
                               <ExternalLink className="w-3.5 h-3.5 text-petal-pink" />
                               <span>Live Canvas</span>
@@ -197,7 +199,7 @@ export default function ProjectsSection() {
                           {project.snippet && (
                             <button
                               onClick={() => setExpandedCode(isCodeOpen ? null : project.id)}
-                              className="inline-flex items-center gap-1.5 bg-bright-lavender/15 border border-bright-lavender/40 hover:bg-bright-lavender/30 text-rose-ink px-4 py-2 rounded-full font-mono text-xs font-semibold cursor-pointer ml-auto"
+                              className="inline-flex w-full items-center justify-center gap-1.5 bg-bright-lavender/15 border border-bright-lavender/40 hover:bg-bright-lavender/30 text-rose-ink px-4 py-2 rounded-full font-mono text-xs font-semibold cursor-pointer sm:ml-auto sm:w-auto"
                             >
                               <Terminal className="w-3.5 h-3.5 text-petal-pink" />
                               <span>{isCodeOpen ? 'Hide Code' : 'Peek Logic'}</span>

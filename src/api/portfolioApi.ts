@@ -1,6 +1,7 @@
 import type { Project, ResearchInterest, SkillCategory } from '../types';
 
-const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8081').replace(/\/$/, '');
+export const hasPortfolioApi = Boolean(import.meta.env.VITE_API_BASE_URL) || import.meta.env.DEV;
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL ?? (import.meta.env.DEV ? 'http://localhost:8081' : '')).replace(/\/$/, '');
 
 type ProjectApiResponse = {
   id: string;

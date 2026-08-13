@@ -48,6 +48,11 @@ export interface ResearchInterest {
   iconName: string;
 }
 
+export interface JournalArticleSection {
+  heading: string;
+  paragraphs: string[];
+}
+
 export interface JournalEntry {
   id: string;
   title: string;
@@ -56,5 +61,7 @@ export interface JournalEntry {
   category: string;
   excerpt: string;
   mood: string;
-  link?: string;
+  slug?: string;
+  sections?: JournalArticleSection[];
+  pullQuote?: string;
 }
