@@ -5,7 +5,6 @@
 
 import { useState, FormEvent } from 'react';
 import { Mail, Github, Linkedin, FileText, Send, CheckCircle, Heart, ArrowUp } from 'lucide-react';
-import { submitContact } from '../api/portfolioApi';
 
 export default function ContactSection() {
   const [name, setName] = useState('');
@@ -14,7 +13,6 @@ export default function ContactSection() {
   const [message, setMessage] = useState('');
   const [website, setWebsite] = useState('');
   const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
   const handleSubmit = async (e: FormEvent) => {
@@ -24,29 +22,13 @@ export default function ContactSection() {
       return;
     }
     
-    setLoading(true);
     setError('');
 
-    try {
-      await submitContact({
-        name,
-        email,
-        subject,
-        message,
-        website,
-      });
+    const emailBody = [`Name: ${name}`, `Email: ${email}`, '', message].join('\n');
+    const mailtoUrl = `mailto:pelinzeynepkaya@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
 
-      setLoading(false);
-      setSubmitted(true);
-      setName('');
-      setEmail('');
-      setSubject('');
-      setMessage('');
-      setWebsite('');
-    } catch (err) {
-      setLoading(false);
-      setError(err instanceof Error ? err.message : 'Message could not be sent right now.');
-    }
+    window.location.href = mailtoUrl;
+    setSubmitted(true);
   };
 
   const syncScrollTop = () => {
@@ -65,15 +47,15 @@ export default function ContactSection() {
           {/* Left: Contact Info & Philosophy */}
           <div className="lg:col-span-5 space-y-6">
             <span className="font-mono text-xs uppercase tracking-widest text-[#DEAFC2] font-semibold block">
-              07 / Connection
+              08 / Connection
             </span>
             <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-ivory-neutral">
-              Write a <span className="font-script text-[#DEAFC2] text-4xl sm:text-5xl italic font-normal lowercase block sm:inline">digital letter</span>
+              Building something whose behavior <span className="font-script text-[#DEAFC2] text-4xl sm:text-5xl italic font-normal lowercase block sm:inline">needs to be understood?</span>
             </h2>
             <div className="w-16 h-1 bg-[#D480BB] mt-4 rounded-full" />
 
             <p className="font-sans text-sm sm:text-base text-ivory/80 leading-relaxed max-w-md pt-2">
-              Whether you are curious about my database compilation theories, want to recruit me for summer engineering cohorts, or just share a cozy tea recipe — I am always listening.
+              If you are working on a system where correctness depends on clear boundaries, visible state, or explainable decisions, I would be glad to hear about it. I’m open to internship, junior engineering, and research-oriented opportunities across backend engineering, software, systems, data, and applied AI.
             </p>
 
             {/* Practical Contact Attributes */}
@@ -94,7 +76,7 @@ export default function ContactSection() {
               </a>
 
               <a
-                href="https://github.com/pelinzkaya"
+                href="https://github.com/aeroplein"
                 target="_blank"
                 referrerPolicy="no-referrer"
                 className="flex items-center gap-3.5 group text-ivory/90 hover:text-[#DEAFC2] transition-colors"
@@ -105,7 +87,7 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <span className="block font-mono text-[9px] uppercase text-white/40">compiled repositories</span>
-                  <span className="block font-sans text-sm font-semibold">github.com/pelinzkaya</span>
+                  <span className="block font-sans text-sm font-semibold">github.com/aeroplein</span>
                 </div>
               </a>
 
@@ -129,12 +111,12 @@ export default function ContactSection() {
 
             {/* Mini cute digital sticker */}
             <div className="p-4 bg-white/5 border border-white/5 rounded-lg text-center font-serif italic text-xs text-ivory/60 max-w-sm">
-              ✿ "No cookie-cutter SaaS logs. Just structured compilers with soft intentions." ✿
+              ✿ Clear boundaries. Visible state. Explainable decisions. ✿
             </div>
           </div>
 
           {/* Right: Immersive envelope style input card */}
-          <div className="lg:col-span-7">
+          <div className="w-full max-w-3xl mx-auto lg:col-span-7 lg:max-w-none">
             <div className="bg-ivory text-deep-plum border border-thistle p-6 sm:p-8 rounded-xl-editorial shadow-xl relative">
               {/* Paper line pattern border on left of stationary */}
               <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[#DEAFC2] via-[#A775C9] to-[#75ADC9] rounded-l-xl-editorial" />
@@ -145,16 +127,16 @@ export default function ContactSection() {
                     <CheckCircle className="w-8 h-8 text-[#D480BB]" />
                   </div>
                   <h3 className="font-serif text-2xl font-bold text-deep-plum">
-                    Letter Stored Safely!
+                    Your Email App Is Ready
                   </h3>
                   <p className="font-sans text-sm text-deep-plum/70 leading-relaxed max-w-sm mx-auto">
-                    Thank you! The Spring Boot backend validated your message and stored it in the portfolio database.
+                    Review the drafted message in your email app, then press send there.
                   </p>
                   <button
                     onClick={() => setSubmitted(false)}
                     className="mt-4 px-5 py-2 rounded-full bg-mulberry hover:bg-rose-ink text-ivory font-serif font-medium text-xs transition-colors cursor-pointer"
                   >
-                    Send Another Note
+                    Write Another Note
                   </button>
                 </div>
               ) : (
@@ -241,17 +223,10 @@ export default function ContactSection() {
 
                   <button
                     type="submit"
-                    disabled={loading}
-                    className="w-full flex items-center justify-center gap-2 bg-mulberry hover:bg-rose-ink disabled:bg-deep-plum/40 text-ivory py-3 rounded-lg font-serif font-medium text-sm tracking-wide transition-all shadow-md active:scale-[0.98] cursor-pointer"
+                    className="w-full flex items-center justify-center gap-2 bg-mulberry hover:bg-rose-ink text-ivory py-3 rounded-lg font-serif font-medium text-sm tracking-wide transition-all shadow-md active:scale-[0.98] cursor-pointer"
                   >
-                    {loading ? (
-                      <span className="font-mono text-xs animate-pulse">transmitting packets...</span>
-                    ) : (
-                      <>
-                        <Send className="w-4 h-4 text-[#DEAFC2]" />
-                        <span>Send Message</span>
-                      </>
-                    )}
+                    <Send className="w-4 h-4 text-[#DEAFC2]" />
+                    <span>Open Email Draft</span>
                   </button>
                 </form>
               )}
@@ -266,13 +241,13 @@ export default function ContactSection() {
           <div className="flex flex-col md:items-start items-center gap-1.5 text-center md:text-left">
             <span className="font-serif font-bold text-xl text-ivory">pelin zeynep.</span>
             <p className="font-mono text-[10px] tracking-wider text-[#DEAFC2] uppercase">
-              computer engineering student ✿ design explorer
+              backend systems ✿ systems programming ✿ applied machine learning
             </p>
           </div>
 
           <p className="text-center font-mono text-xs text-ivory/50">
-            © 2026 Pelin Zeynep Kaya. Crafted with{' '}
-            <Heart className="w-3.5 h-3.5 text-[#D480BB] fill-[#D480BB] inline-block mx-0.5" /> in London/London-dev context.
+            © 2026 Pelin Zeynep Kaya. Built with care for the details people cannot see.{' '}
+            <Heart className="w-3.5 h-3.5 text-[#D480BB] fill-[#D480BB] inline-block mx-0.5" />
           </p>
 
           <button

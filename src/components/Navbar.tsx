@@ -14,6 +14,7 @@ export default function Navbar({ onNavigate }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const resumeUrl = `${import.meta.env.BASE_URL}Pelin-Zeynep-Kaya-Resume.pdf`;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,7 +57,7 @@ export default function Navbar({ onNavigate }: NavbarProps) {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-lilac-mist/85 backdrop-blur-md py-4 border-b border-thistle/20 shadow-sm'
+          ? 'bg-lilac-mist/98 backdrop-blur-md py-4 border-b border-thistle/20 shadow-sm'
           : 'bg-transparent py-6'
       }`}
     >
@@ -100,11 +101,10 @@ export default function Navbar({ onNavigate }: NavbarProps) {
           </ul>
 
           <a
-            href="#contact"
-            onClick={(e) => {
-              e.preventDefault();
-              handleLinkClick('contact');
-            }}
+            href={resumeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open Pelin Zeynep Kaya's resume as a PDF"
             className="flex items-center gap-2 bg-gradient-to-br from-[#DEAFC2] via-[#D480BB] to-[#A775C9] text-[#F4F7EA] border border-[#F4F7EA]/45 px-4 py-2 rounded-full font-serif font-medium text-sm tracking-wide shadow-[0_12px_28px_rgba(212,128,187,0.22)] hover:shadow-[0_16px_32px_rgba(212,128,187,0.32)] hover:-translate-y-[2px] hover:brightness-105 active:scale-[0.98] transition-all duration-300 cursor-pointer"
           >
             <FileText className="w-4 h-4 text-[#F4F7EA]" />
@@ -142,11 +142,11 @@ export default function Navbar({ onNavigate }: NavbarProps) {
 
           <div className="flex flex-col items-center border-t border-thistle/30 pt-4 gap-3">
             <a
-              href="#contact"
-              onClick={(e) => {
-                e.preventDefault();
-                handleLinkClick('contact');
-              }}
+              href={resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open Pelin Zeynep Kaya's resume as a PDF"
+              onClick={() => setIsOpen(false)}
               className="w-full flex justify-center items-center gap-2 bg-gradient-to-br from-[#DEAFC2] via-[#D480BB] to-[#A775C9] text-[#F4F7EA] border border-[#F4F7EA]/45 py-2.5 rounded-full font-serif font-medium text-sm text-center shadow-[0_12px_28px_rgba(212,128,187,0.22)] hover:shadow-[0_16px_32px_rgba(212,128,187,0.32)] hover:-translate-y-[2px] hover:brightness-105 active:scale-[0.98] transition-all duration-300 cursor-pointer"
             >
               <FileText className="w-4 h-4 text-[#F4F7EA]" />
