@@ -17,10 +17,18 @@ spring:
 
 server:
   port: ${PORT:8081}
+  forward-headers-strategy: framework
 
 app:
   cors:
     allowed-origin: ${FRONTEND_ORIGIN:http://localhost:5173}
+  mail:
+    enabled: ${CONTACT_MAIL_ENABLED:false}
+    resend:
+      api-key: ${RESEND_API_KEY:}
+      base-url: https://api.resend.com
+    to-email: ${CONTACT_TO_EMAIL:}
+    from-email: ${CONTACT_FROM_EMAIL:}
 
 ---
 spring:

@@ -13,9 +13,14 @@ import java.time.Instant;
 public class ContactService {
 
     private final ContactMessageRepository contactMessageRepository;
+    private final ContactEmailService contactEmailService;
 
-    public ContactService(ContactMessageRepository contactMessageRepository) {
+    public ContactService(
+            ContactMessageRepository contactMessageRepository,
+            ContactEmailService contactEmailService
+    ) {
         this.contactMessageRepository = contactMessageRepository;
+        this.contactEmailService = contactEmailService;
     }
 
     @Transactional
@@ -28,11 +33,14 @@ public class ContactService {
                 Instant.now()
         );
 
-        ContactMessage savedMessage = contactMessageRepository.save(contactMessage);
+        ContactMessage savedMessage = contactMessageRepository.saveAndFlush(contactMessage);
+        boolean emailSent = contactEmailService.send(savedMessage);
 
         return new ContactResponse(
                 true,
-                "Your message was validated and stored successfully.",
+                emailSent
+                        ? "Your message was sent successfully."
+                        : "Your message was validated and stored successfully.",
                 savedMessage.getId(),
                 savedMessage.getCreatedAt()
         );

@@ -7,3 +7,12 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# Personal planning and review artifacts
+/TODO.md
+/portfolio-content-mockup/
+/docs/
+
+# Python-generated files used by local document tooling
+__pycache__/
+*.py[cod]
