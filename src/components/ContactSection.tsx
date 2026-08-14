@@ -5,6 +5,7 @@
 
 import { useState, FormEvent } from 'react';
 import { Mail, Github, Linkedin, FileText, Send, CheckCircle, Heart, ArrowUp } from 'lucide-react';
+import { PortfolioApiError, submitContact } from '../api/portfolioApi';
 
 export default function ContactSection() {
   const [name, setName] = useState('');
@@ -13,6 +14,8 @@ export default function ContactSection() {
   const [message, setMessage] = useState('');
   const [website, setWebsite] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
 
   const handleSubmit = async (e: FormEvent) => {
@@ -24,11 +27,21 @@ export default function ContactSection() {
     
     setError('');
 
-    const emailBody = [`Name: ${name}`, `Email: ${email}`, '', message].join('\n');
-    const mailtoUrl = `mailto:pelinzeynepkaya@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
+    setIsSubmitting(true);
 
-    window.location.href = mailtoUrl;
-    setSubmitted(true);
+    try {
+      const response = await submitContact({ name, email, subject, message, website });
+      setSuccessMessage(response.message);
+      setSubmitted(true);
+    } catch (requestError) {
+      setError(
+        requestError instanceof PortfolioApiError
+          ? requestError.message
+          : 'Your message could not be sent right now. Please try again later.',
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const syncScrollTop = () => {
@@ -127,13 +140,16 @@ export default function ContactSection() {
                     <CheckCircle className="w-8 h-8 text-[#D480BB]" />
                   </div>
                   <h3 className="font-serif text-2xl font-bold text-deep-plum">
-                    Your Email App Is Ready
+                    Message Sent
                   </h3>
                   <p className="font-sans text-sm text-deep-plum/70 leading-relaxed max-w-sm mx-auto">
-                    Review the drafted message in your email app, then press send there.
+                    {successMessage}
                   </p>
                   <button
-                    onClick={() => setSubmitted(false)}
+                    onClick={() => {
+                      setSubmitted(false);
+                      setSuccessMessage('');
+                    }}
                     className="mt-4 px-5 py-2 rounded-full bg-mulberry hover:bg-rose-ink text-ivory font-serif font-medium text-xs transition-colors cursor-pointer"
                   >
                     Write Another Note
@@ -223,10 +239,11 @@ export default function ContactSection() {
 
                   <button
                     type="submit"
-                    className="w-full flex items-center justify-center gap-2 bg-mulberry hover:bg-rose-ink text-ivory py-3 rounded-lg font-serif font-medium text-sm tracking-wide transition-all shadow-md active:scale-[0.98] cursor-pointer"
+                    disabled={isSubmitting}
+                    className="w-full flex items-center justify-center gap-2 bg-mulberry hover:bg-rose-ink text-ivory py-3 rounded-lg font-serif font-medium text-sm tracking-wide transition-all shadow-md active:scale-[0.98] cursor-pointer disabled:cursor-wait disabled:opacity-70"
                   >
                     <Send className="w-4 h-4 text-[#DEAFC2]" />
-                    <span>Open Email Draft</span>
+                    <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
                   </button>
                 </form>
               )}

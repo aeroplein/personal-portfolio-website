@@ -2,7 +2,9 @@ package com.pelinportfolio.api;
 
 import com.pelinportfolio.api.dto.ContactRequest;
 import com.pelinportfolio.api.dto.ContactResponse;
+import com.pelinportfolio.api.model.ContactMessage;
 import com.pelinportfolio.api.repository.ContactMessageRepository;
+import com.pelinportfolio.api.service.ContactEmailService;
 import com.pelinportfolio.api.service.ContactService;
 import com.pelinportfolio.api.service.ProjectService;
 import com.pelinportfolio.api.service.ResearchService;
@@ -10,6 +12,12 @@ import com.pelinportfolio.api.service.SkillService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import com.sun.net.httpserver.HttpServer;
+import java.net.InetSocketAddress;
+import java.nio.charset.StandardCharsets;
+import java.time.Instant;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -78,5 +86,48 @@ class PortfolioApplicationTests {
                 .get()
                 .extracting(message -> message.getEmail())
                 .isEqualTo("grace@example.com");
+    }
+
+    @Test
+    void configuredContactEmailUsesResendHttpApi() throws Exception {
+        AtomicReference<String> authorization = new AtomicReference<>();
+        AtomicReference<String> requestBody = new AtomicReference<>();
+        HttpServer server = HttpServer.create(new InetSocketAddress("127.0.0.1", 0), 0);
+        server.createContext("/emails", exchange -> {
+            authorization.set(exchange.getRequestHeaders().getFirst("Authorization"));
+            requestBody.set(new String(exchange.getRequestBody().readAllBytes(), StandardCharsets.UTF_8));
+            byte[] response = "{\"id\":\"email-test-id\"}".getBytes(StandardCharsets.UTF_8);
+            exchange.getResponseHeaders().set("Content-Type", "application/json");
+            exchange.sendResponseHeaders(200, response.length);
+            exchange.getResponseBody().write(response);
+            exchange.close();
+        });
+        server.start();
+
+        try {
+            ContactEmailService emailService = new ContactEmailService(
+                    true,
+                    "test-api-key",
+                    "owner@example.com",
+                    "Portfolio <hello@example.com>",
+                    "http://127.0.0.1:" + server.getAddress().getPort()
+            );
+            boolean sent = emailService.send(new ContactMessage(
+                    "Grace Hopper",
+                    "grace@example.com",
+                    "Portfolio contact",
+                    "Hello from the email integration test.",
+                    Instant.now()
+            ));
+
+            assertThat(sent).isTrue();
+            assertThat(authorization.get()).isEqualTo("Bearer test-api-key");
+            assertThat(requestBody.get())
+                    .contains("\"reply_to\":\"grace@example.com\"")
+                    .contains("\"to\":[\"owner@example.com\"]")
+                    .contains("Portfolio contact");
+        } finally {
+            server.stop(0);
+        }
     }
 }

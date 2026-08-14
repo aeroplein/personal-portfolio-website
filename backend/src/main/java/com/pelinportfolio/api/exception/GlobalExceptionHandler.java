@@ -39,6 +39,16 @@ public class GlobalExceptionHandler {
         return buildResponse(HttpStatus.BAD_REQUEST, "Request body must be valid JSON.", Map.of());
     }
 
+    @ExceptionHandler(ContactDeliveryException.class)
+    public ResponseEntity<ApiErrorResponse> handleContactDelivery(ContactDeliveryException exception) {
+        return buildResponse(HttpStatus.BAD_GATEWAY, exception.getMessage(), Map.of());
+    }
+
+    @ExceptionHandler(ContactRateLimitException.class)
+    public ResponseEntity<ApiErrorResponse> handleContactRateLimit(ContactRateLimitException exception) {
+        return buildResponse(HttpStatus.TOO_MANY_REQUESTS, exception.getMessage(), Map.of());
+    }
+
     private ResponseEntity<ApiErrorResponse> buildResponse(
             HttpStatus status,
             String message,
