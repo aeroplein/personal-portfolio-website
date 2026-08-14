@@ -124,6 +124,23 @@ npm run lint
 npm run build
 ```
 
+## CI/CD
+
+GitHub Actions runs `.github/workflows/ci.yml` for every pull request and every push to `main`. The frontend and backend checks run in parallel:
+
+- Frontend: `npm ci`, TypeScript checks, and the Vite production build
+- Backend: Java 21 and `mvn verify`, including all JUnit tests
+
+No deployment secrets are required by CI. Before merging, configure the `main` branch to require both `Frontend checks` and `Backend tests` in GitHub branch protection rules.
+
+Deployment is handled by the hosting providers' Git integrations after a successful merge to `main`:
+
+1. GitHub runs CI on the pull request.
+2. The pull request is merged only after both checks pass.
+3. Vercel detects the new `main` commit and deploys the frontend.
+4. Render detects the same commit and deploys the Spring Boot backend.
+5. Neon remains the external PostgreSQL service; schema updates run when Spring Boot starts with the `postgres` profile.
+
 ## Deploy
 
 ### 1. Neon PostgreSQL
