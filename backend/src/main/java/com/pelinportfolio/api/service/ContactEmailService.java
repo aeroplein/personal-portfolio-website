@@ -8,13 +8,18 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.util.HtmlUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Map;
 
 @Service
 public class ContactEmailService {
+
+    private static final Logger logger = LoggerFactory.getLogger(ContactEmailService.class);
 
     private final RestClient restClient;
     private final boolean enabled;
@@ -78,7 +83,15 @@ public class ContactEmailService {
                     .retrieve()
                     .toBodilessEntity();
             return true;
+        } catch (RestClientResponseException exception) {
+            logger.error(
+                    "Resend contact email request failed: status={}, response={}",
+                    exception.getStatusCode(),
+                    exception.getResponseBodyAsString()
+            );
+            throw new ContactDeliveryException("Your message could not be sent right now.", exception);
         } catch (RestClientException exception) {
+            logger.error("Resend contact email request failed before a response was received.", exception);
             throw new ContactDeliveryException("Your message could not be sent right now.", exception);
         }
     }
